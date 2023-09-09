@@ -1,0 +1,47 @@
+version: '1.0'
+
+services:
+  # easycode_authenticator_backend:
+  #   image: easycode_authenticator_backend
+  #   restart: always
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - ec-authenticator-postgres
+  #     - ec-authenticator-redis
+  #     - ec-authenticator-minio
+
+  ec-authenticator-postgres:
+    image: chichenn/ec-auth-postgres
+    build:
+      context: docker-manifest/ec-authenticator-postgres
+      dockerfile: ./Dockerfile
+    ports:
+      - 5432:5432
+
+  ec-authenticator-redis:
+    image: chichenn/ec-auth-redis
+    build:
+      context: docker-manifest/ec-authenticator-redis
+      dockerfile: ./Dockerfile
+    ports:
+      - 6379:6379
+
+  ec-authenticator-minio:
+    image: chichenn/ec-auth-minio
+    build:
+      context: docker-manifest/ec-authenticator-minio
+      dockerfile: ./Dockerfile
+    command: server --console-address ":9090" http://minio/data{1...2}
+    ports:
+      - 9090:9090
+      - 9000:9000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
