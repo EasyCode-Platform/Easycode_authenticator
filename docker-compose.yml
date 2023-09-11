@@ -1,19 +1,36 @@
-version: '1.0'
-
+version: '3.7' # 所有容器通用的设置和配置
+x-minio-common: &minio-common
+  image: minio/minio
+  command: server --console-address ":9001" http://minio{1...4}/data
+  expose:
+    - "9000"
+  environment:
+    MINIO_ROOT_USER: ec-authenticator
+    MINIO_ROOT_PASSWORD: scut2023
+  healthcheck:
+    test:
+      [
+        "CMD",
+        "curl",
+        "-f",
+        "http://192.168.10.106:9000/minio/health/live"
+      ]
+    interval: 30s
+    timeout: 20s
+    retries: 3
 services:
-  # easycode_authenticator_backend:
-  #   image: easycode_authenticator_backend
-  #   restart: always
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     - ec-authenticator-postgres
-  #     - ec-authenticator-redis
-  #     - ec-authenticator-minio
-
+  easycode_authenticator_backend:
+    image: easycode_authenticator_backend
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - ec-authenticator-postgres
+      - ec-authenticator-redis
+      - ec-authenticator-minio
   ec-authenticator-postgres:
     image: chichenn/ec-auth-postgres
     build:
@@ -23,25 +40,52 @@ services:
       - 5432:5432
 
   ec-authenticator-redis:
-    image: chichenn/ec-auth-redis
-    build:
-      context: docker-manifest/ec-authenticator-redis
-      dockerfile: ./Dockerfile
+    image: redis:latest
+    command: --requirepass scut2023
     ports:
       - 6379:6379
 
-  ec-authenticator-minio:
-    image: chichenn/ec-auth-minio
-    build:
-      context: docker-manifest/ec-authenticator-minio
-      dockerfile: ./Dockerfile
-    command: server --console-address ":9090" http://minio/data{1...2}
+  minio1:
+    <<: *minio-common
+    hostname: minio1
     ports:
-      - 9090:9090
-      - 9000:9000
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
+      - "9001:9001"
+    volumes:
+      - ./data/data1:/data
 
+  minio2:
+    <<: *minio-common
+    hostname: minio2
+    ports:
+      - "9002:9001"
+    volumes:
+      - ./data/data2:/data
+
+  minio3:
+    <<: *minio-common
+    hostname: minio3
+    ports:
+      - "9003:9001"
+    volumes:
+      - ./data/data3:/data
+
+  minio4:
+    <<: *minio-common
+    hostname: minio4
+    ports:
+      - "9004:9001"
+    volumes:
+      - ./data/data4:/data
+
+  nginx:
+    image: nginx:1.19.2-alpine
+    hostname: nginx
+    volumes:
+      - ./docker-manifest/nginx-config/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9000:9000"
+    depends_on:
+      - minio1
+      - minio2
+      - minio3
+      - minio4
