@@ -30,7 +30,10 @@ services:
     depends_on:
       - ec-authenticator-postgres
       - ec-authenticator-redis
-      - ec-authenticator-minio
+      - minio1
+      - minio2
+      - minio3
+      - minio4
   ec-authenticator-postgres:
     image: chichenn/ec-auth-postgres
     build:
