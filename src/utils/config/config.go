@@ -22,13 +22,13 @@ type Config struct {
 	ServeHTTPS         string `env:"EasyCode_DEPLOY_SERVE_HTTPS"       envDefault:"false"`
 
 	// storage config
-	PostgresAddr     string `env:"EasyCode_SUPERVISOR_PG_ADDR" envDefault:"localhost"`
+	PostgresAddr     string `env:"EasyCode_SUPERVISOR_PG_ADDR" envDefault:"postgres"`
 	PostgresPort     string `env:"EasyCode_SUPERVISOR_PG_PORT" envDefault:"5432"`
 	PostgresUser     string `env:"EasyCode_SUPERVISOR_PG_USER" envDefault:"easycode_authenticator"`
 	PostgresPassword string `env:"EasyCode_SUPERVISOR_PG_PASSWORD" envDefault:"scut2023"`
 	PostgresDatabase string `env:"EasyCode_SUPERVISOR_PG_DATABASE" envDefault:"easycode_authenticator"`
 	// cache config
-	RedisAddr     string `env:"EasyCode_REDIS_ADDR" envDefault:"localhost"`
+	RedisAddr     string `env:"EasyCode_REDIS_ADDR" envDefault:"redis"`
 	RedisPort     string `env:"EasyCode_REDIS_PORT" envDefault:"6379"`
 	RedisPassword string `env:"EasyCode_REDIS_PASSWORD" envDefault:""`
 	RedisDatabase int    `env:"EasyCode_REDIS_DATABASE" envDefault:"0"`
@@ -38,7 +38,7 @@ type Config struct {
 	DriveAccessKeyID      string `env:"EasyCode_DRIVE_ACCESS_KEY_ID"      envDefault:"ec-authenticator"`
 	DriveAccessKeySecret  string `env:"EasyCode_DRIVE_ACCESS_KEY_SECRET"  envDefault:"scut2023"`
 	DriveRegion           string `env:"EasyCode_DRIVE_REGION"             envDefault:""`
-	DriveEndpoint         string `env:"EasyCode_DRIVE_ENDPOINT"           envDefault:"127.0.0.1:9000"`
+	DriveEndpoint         string `env:"EasyCode_DRIVE_ENDPOINT"           envDefault:"nginx:9000"`
 	DriveSystemBucketName string `env:"EasyCode_DRIVE_SYSTEM_BUCKET_NAME" envDefault:"easycode-authenticator"`
 	DriveTeamBucketName   string `env:"EasyCode_DRIVE_TEAM_BUCKET_NAME"   envDefault:"easycode-authenticator-team"`
 	DriveUploadTimeoutRaw string `env:"EasyCode_DRIVE_UPLOAD_TIMEOUT"     envDefault:"300s"`
