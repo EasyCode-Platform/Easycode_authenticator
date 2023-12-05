@@ -23,7 +23,7 @@ services:
     restart: always
     build: .
     ports:
-      - 8080:8080
+      - 8003:8080
     depends_on:
       - ec-authenticator-postgres
       - ec-authenticator-redis
