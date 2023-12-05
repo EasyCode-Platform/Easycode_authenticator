@@ -123,71 +123,71 @@ alter table unit_role_relations owner to easycode_authenticator;
  *
  *
  */
-INSERT INTO teams (
-        id,
-        uid,
-        name,
-        identifier,
-        icon,
-        permission,
-        created_at,
-        updated_at
-    )
-VALUES (
-        0,
-        '00000000-0000-0000-0000-000000000000',
-        'my-team',
-        '0',
-        '',
-        to_jsonb(
-            '{"allowEditorInvite": true, "allowViewerInvite": true, "inviteLinkEnabled": true, "allowEditorManageTeamMember": true, "allowViewerManageTeamMember": true}'::text
-        ),
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
-    );
-INSERT INTO users (
-        id,
-        uid,
-        nickname,
-        password_digest,
-        email,
-        avatar,
-        sso_config,
-        customization,
-        created_at,
-        updated_at
-    )
-VALUES (
-        1,
-        '00000000-0000-0000-0000-000000000000',
-        'root',
-        '$2a$10$iVIxJRgy1K6RIV389AYg3OiMIbuDyuCIja1xrHGkCljdg/6gdmWXa'::text,
-        'root',
-        '',
-        to_jsonb('{"default": ""}'::text),
-        to_jsonb(
-            '{"Language": "en-US", "IsSubscribed": false}'::text
-        ),
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
-    );
-INSERT INTO team_members (
-        id,
-        team_id,
-        user_id,
-        user_role,
-        permission,
-        status,
-        created_at,
-        updated_at
-    )
-VALUES (
-        1,
-        0,
-        1,
-        1,
-        to_jsonb('{"Config": 0}'::text),
-        1,
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
-    );
+-- INSERT INTO teams (
+--         id,
+--         uid,
+--         name,
+--         identifier,
+--         icon,
+--         permission,
+--         created_at,
+--         updated_at
+--     )
+-- VALUES (
+--         0,
+--         '00000000-0000-0000-0000-000000000000',
+--         'my-team',
+--         '0',
+--         '',
+--         to_jsonb(
+--             '{"allowEditorInvite": true, "allowViewerInvite": true, "inviteLinkEnabled": true, "allowEditorManageTeamMember": true, "allowViewerManageTeamMember": true}'::text
+--         ),
+--         CURRENT_TIMESTAMP,
+--         CURRENT_TIMESTAMP
+--     );
+-- INSERT INTO users (
+--         id,
+--         uid,
+--         nickname,
+--         password_digest,
+--         email,
+--         avatar,
+--         sso_config,
+--         customization,
+--         created_at,
+--         updated_at
+--     )
+-- VALUES (
+--         1,
+--         '00000000-0000-0000-0000-000000000000',
+--         'root',
+--         '$2a$10$iVIxJRgy1K6RIV389AYg3OiMIbuDyuCIja1xrHGkCljdg/6gdmWXa'::text,
+--         'root',
+--         '',
+--         to_jsonb('{"default": ""}'::text),
+--         to_jsonb(
+--             '{"Language": "en-US", "IsSubscribed": false}'::text
+--         ),
+--         CURRENT_TIMESTAMP,
+--         CURRENT_TIMESTAMP
+--     );
+-- INSERT INTO team_members (
+--         id,
+--         team_id,
+--         user_id,
+--         user_role,
+--         permission,
+--         status,
+--         created_at,
+--         updated_at
+--     )
+-- VALUES (
+--         1,
+--         0,
+--         1,
+--         1,
+--         to_jsonb('{"Config": 0}'::text),
+--         1,
+--         CURRENT_TIMESTAMP,
+--         CURRENT_TIMESTAMP
+--     );

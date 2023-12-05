@@ -30,7 +30,7 @@ type Config struct {
 	// cache config
 	RedisAddr     string `env:"EasyCode_REDIS_ADDR" envDefault:"redis"`
 	RedisPort     string `env:"EasyCode_REDIS_PORT" envDefault:"6379"`
-	RedisPassword string `env:"EasyCode_REDIS_PASSWORD" envDefault:""`
+	RedisPassword string `env:"EasyCode_REDIS_PASSWORD" envDefault:"scut2023"`
 	RedisDatabase int    `env:"EasyCode_REDIS_DATABASE" envDefault:"0"`
 
 	// drive config
