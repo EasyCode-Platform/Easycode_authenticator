@@ -2,6 +2,9 @@
 
 all: build 
 
+install:
+	bash ./init.sh
+
 docker-build:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" ./src/cmd/authenticator-backend/main.go
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" ./src/cmd/authenticator-backend-internal/internal-main.go
