@@ -171,23 +171,23 @@ VALUES (
         CURRENT_TIMESTAMP,
         CURRENT_TIMESTAMP
     );
-INSERT INTO team_members (
-        id,
-        team_id,
-        user_id,
-        user_role,
-        permission,
-        status,
-        created_at,
-        updated_at
-    )
-VALUES (
-        1,
-        0,
-        1,
-        1,
-        to_jsonb('{"Config": 0}'::text),
-        1,
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
-    );
+-- INSERT INTO team_members (
+--         id,
+--         team_id,
+--         user_id,
+--         user_role,
+--         permission,
+--         status,
+--         created_at,
+--         updated_at
+--     )
+-- VALUES (
+--         1,
+--         0,
+--         1,
+--         1,
+--         to_jsonb('{"Config": 0}'::text),
+--         1,
+--         CURRENT_TIMESTAMP,
+--         CURRENT_TIMESTAMP
+--     );
